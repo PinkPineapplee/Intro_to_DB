@@ -21,7 +21,7 @@ def execute_safe_sql(cursor, query):
 
 def create_database():       
     try:
-            connection = mysql.connector.connect(
+            mydb = mysql.connector.connect(
                     host = "127.0.0.1",
                     port = 3306,
                     user = "root",
@@ -29,8 +29,8 @@ def create_database():
                     )
 
 
-            if connection.is_connected():
-                cursor = connection.cursor()
+            if mydb.is_connected():
+                cursor = mydb.cursor()
                 cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
                 cursor.execute("USE alx_book_store")
                 print("Database 'alx_book_store' created successfully!")
@@ -40,15 +40,15 @@ def create_database():
                 # execute_safe_sql(cursor, "CREATE TABLE IF NOT EXISTS test_table (name VARCHAR(50));")  # allowed
                 # execute_safe_sql(cursor, "INSERT INTO test_table (name) VALUES ('Vera');")             # allowed
 
-                # connection.commit()
+                # mydb.commit()
     except Error as e:
         print("Error while connecting to MySQL: ", e)  
 
     finally:
-        if connection.is_connected():
+        if mydb.is_connected():
             cursor.close()
-            connection.close()
-            print("Connection closed.")
+            mydb.close()
+            print("mydb closed.")
 
 if __name__ == "__main__":
     create_database()
