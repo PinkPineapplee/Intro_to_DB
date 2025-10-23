@@ -14,12 +14,14 @@ def execute_safe_sql(cursor, query):
     try:
         cursor.execute(query)
         print(f"✅ Executed: {query}")
-    except Error as e:
+    except mysql.connector.Error as e:
         print(f"⚠️ MySQL Error while executing query: {e}")
 
 
 
-def create_database():       
+def create_database():   
+    mydb = None
+    cursor = None    
     try:
             mydb = mysql.connector.connect(
                     host = "127.0.0.1",
@@ -41,14 +43,18 @@ def create_database():
                 # execute_safe_sql(cursor, "INSERT INTO test_table (name) VALUES ('Vera');")             # allowed
 
                 # mydb.commit()
-    except Error as e:
-        print("Error while connecting to MySQL: ", e)  
+    except mysql.connector.Error as e:
+        print(f"MySQL Error: {e}")
+
+    except Exception as e:
+        print(f"General Error: {e}")
 
     finally:
-        if mydb.is_connected():
+        if cursor is not None:
             cursor.close()
+        if mydb is not None and mydb.is_connected():
             mydb.close()
-            print("mydb closed.")
+            print("MySQL connection closed.")
 
 if __name__ == "__main__":
     create_database()
