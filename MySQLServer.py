@@ -37,12 +37,12 @@ def create_database():
                 cursor.execute("USE alx_book_store")
                 print("Database 'alx_book_store' created successfully!")
                  # Test the rule:
-                # execute_safe_sql(cursor, "SELECT * FROM test_table;")   # blocked
-                # execute_safe_sql(cursor, "SHOW DATABASES;")             # blocked
-                # execute_safe_sql(cursor, "CREATE TABLE IF NOT EXISTS test_table (name VARCHAR(50));")  # allowed
-                # execute_safe_sql(cursor, "INSERT INTO test_table (name) VALUES ('Vera');")             # allowed
+                execute_safe_sql(cursor, "SELECT * FROM test_table;")   # blocked
+                execute_safe_sql(cursor, "SHOW DATABASES;")             # blocked
+                execute_safe_sql(cursor, "CREATE TABLE IF NOT EXISTS test_table (name VARCHAR(50));")  # allowed
+                execute_safe_sql(cursor, "INSERT INTO test_table (name) VALUES ('Vera');")             # allowed
 
-                # mydb.commit()
+                mydb.commit()
     except mysql.connector.Error as e:
         print(f"MySQL Error: {e}")
 
