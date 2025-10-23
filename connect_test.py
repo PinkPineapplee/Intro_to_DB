@@ -1,11 +1,13 @@
 import mysql.connector
 from mysql.connector import Error
 
+
+
 def execute_safe_sql(cursor, query):
     """Check query before running it """
     lower_query = query.lower().strip()
 
-    if lower_query.startswith("select") or lower_query.startwith("show"):
+    if lower_query.startswith("select") or lower_query.startswith("show"):
         print(" Error : 'SELECT' and 'SHOW' statements are not allowed.")
         return
 
@@ -14,6 +16,8 @@ def execute_safe_sql(cursor, query):
         print(f"✅ Executed: {query}")
     except Error as e:
         print(f"⚠️ MySQL Error while executing query: {e}")
+
+
 
 def create_database():       
     try:
@@ -46,4 +50,5 @@ def create_database():
             connection.close()
             print("Connection closed.")
 
-      
+if __name__ == "__main__":
+    create_database()
