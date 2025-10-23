@@ -19,6 +19,7 @@ def create_alx_book_store_db():
             cursor.execute("USE alx_book_store")
             print(f"Database {mydb.database} created successfully!")
     except Error as e:
+        mysql.connector.Error
         print("Error while connecting to MySQL", e)
     finally:
         if cursor is not None:
