@@ -1,9 +1,12 @@
 SELECT 
-    book_id,
-    title,
-    author_id
-    price,
-    published_date
-FROM alx_book_store.Books
-WHERE TABLE_SCHEMA = DATABASE('alx_book_store')
-  AND TABLE_NAME = 'Books';
+    COLUMN_NAME,
+    COLUMN_TYPE,
+    IS_NULLABLE,
+    COLUMN_KEY,
+    COLUMN_DEFAULT,
+    EXTRA
+FROM 
+    INFORMATION_SCHEMA.COLUMNS
+WHERE 
+    TABLE_NAME = 'books'
+    AND TABLE_SCHEMA = DATABASE();
